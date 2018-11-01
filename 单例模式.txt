@@ -1,0 +1,69 @@
+/**
+ * 多线程的单例模式，使用双重校验机制
+ */
+
+public class DoubleCheckMode {
+
+    
+private volatile static DoubleCheckMode sDoubleCheckMode ;
+
+    
+public DoubleCheckMode() {
+        
+   
+}
+
+    
+public static DoubleCheckMode getInstance() {
+        
+if (sDoubleCheckMode == null)
+            
+synchronized (DoubleCheckMode.class) {
+                
+if (sDoubleCheckMode == null) {
+                    
+sDoubleCheckMode = new DoubleCheckMode();
+                
+}
+            
+}
+        
+return sDoubleCheckMode;
+    
+}
+
+/**
+ * 静态内部类的方式实现单例，可以保证多线程的对象唯一性，还有提升性能，不用同步锁机制
+ */
+
+public class InnerStaticMode {
+
+    
+private static class SingleTonHolder {
+
+        
+public static InnerStaticMode sInnerStaticMode = new InnerStaticMode();
+
+    
+}
+
+    
+public static InnerStaticMode getInstance(){
+        
+return SingleTonHolder.sInnerStaticMode;
+    
+}
+
+}
+
+/**
+ * 利用枚举的方式实现单例，Android不推荐
+ */
+
+public enum  EnumMode {
+
+    
+INSTANCE
+}
+
+
