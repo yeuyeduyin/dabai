@@ -1,0 +1,21 @@
+mysql添加索引
+
+1.添加PRIMARY KEY（主键索引） 
+CREATE TABLE `table_name` ADD PRIMARY KEY ( `column` ) 
+2.添加UNIQUE(唯一索引) 
+ALTER TABLE `table_name` ADD UNIQUE ( `column` ) 
+3.添加INDEX(普通索引) 
+ALTER TABLE `table_name` ADD INDEX index_name ( `column` ) 
+4.添加FULLTEXT(全文索引) 
+ALTER TABLE `table_name` ADD FULLTEXT ( `column`) 
+5.添加多列索引 
+ALTER TABLE `table_name` ADD INDEX index_name ( `column1`, `column2`, `column3` )
+
+CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX 索引名 
+ON 表名（字段名[(长度)] [ASC|DESC]）; 
+
+参数说明 
+UNIQUE、FULLTEXT和SPATIAL都是可选参数，分别用于表示唯一性索引、全文索引和空间索引。 
+INDEX，用于指明字段为索引。 
+
+show index from plan_tab 查看表中所有索引
