@@ -1,7 +1,0 @@
-@RestController
-@RequestMapping
-
-
-@PathVariable ：绑定URI模板变量值、是用来获得请求url中的动态参数的、用于将请求URL中的模板变量映射到功能处理方法的参数上例子：@RequestMapping("item/{itemId}") @PathVariable int itemId
-@RequestParam 用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST；该注解有两个属性： value、required； value用来指定要传入值的id名称，required用来指示参数是否必须绑定；
-@RequestBody 该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；它是通过使用HandlerAdapter 配置的HttpMessageConverters来解析post data body，然后绑定到相应的bean上的。

@@ -1,0 +1,4 @@
+java中Comparable和Comparator两种比较器的区别
+Comparable和Comparator接口都是为了对类进行比较，众所周知，诸如Integer，double等基本数据类型，java可以对他们进行比较，而对于类的比较，需要人工定义比较用到的字段比较逻辑。可以把Comparable理解为内部比较器，而Comparator是外部比较器。实现了Comparable接口的类需要实现compareTo()方法，传入一个外部参数进行比对，实现了Comparator接口的方法需要实现compare()方法，对外部传入的两个类进行比较，从而让外部方法在比较时调用。
+
+　　两者的区别是实现Comparator接口代码更加灵活，可以定义某个类的多个比较器，从而在排序时根据实际场景自由调用，而Comparable接口实现后便不能改动。
