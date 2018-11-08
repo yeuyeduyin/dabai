@@ -1,0 +1,114 @@
+    java中多线程常常需要访问一个共享资源，这时候需要用到synchronized关键字危害数据的一致性。
+    synchronized机制是给共享资源上锁，线程拿到锁才能访问共享资源。
+    java中的锁是指内部锁，每个Java对象都是一个实现同步的锁（锁必须是引用类型，基本数据类型不可以），执行线程进入synchronized块之前会获得锁，之后通过正常语句退出还是执行过程中抛出异常，线程都会在放弃对synchronized块的控制时自动释放锁，获得锁的唯一途径就是进入这个内部锁保护的同步块或方法。
+    内置锁是互斥锁，是一种互斥机制。
+    依据使用方法的不同一般我们将锁分为对象锁和类锁，差别在与对象锁是作用在实例方法或者一个对象的实例上面，类锁是作用在静态方法或者Class对象上面，一个类的对象锁可以有多个，单每个类只有一个Class对象，所以类锁只有一个。类锁是一个概念上的东西并不是真实存在的，它只是用来帮助我们理解锁定的是实例方法还是静态方法的区别。
+    java中实现锁的机制不仅仅限于使用synchronized关键字，还有JDK1.5之后的Lock.
+    一个synchronization块包含两个部分：锁对象的引用，以及这个锁保护的代码块。如果作用在实例方法上面，锁就是该方法所在的当前对象，静态synchronized方法会从Class对象上获得锁。
+    synchronized时会有两种方式，一种是上面的同步方法，即用synchronized来修饰方法，另一种是提供的同步代码块。
+    //下列两个方法有什么区别
+    public synchronized void method1(){}
+ 
+    public void method2(){
+       synchronized  (obj){}
+    }
+    同步块会有一个同步的”目标“，使得同步块更加灵活一些（同步块可以通过”目标“决定需要锁定的对象）。
+    一般情况下，如果此”目标“为this，那么同步方法和同步块没有太大的区别。
+    代码示例：
+
+    class Basic {
+
+    public static void main(String[] args)
+    {
+        //一个对象的实例作为线程的实验对象，有四个方法添加了对象锁和类锁
+        ThreadTest t=new ThreadTest();
+        //一个对象的实例作为线程的实验对象，有四个方法添加了对象锁和类锁
+        ThreadTest t1=new ThreadTest();
+        //添加一个线程，调用实例t的A方法
+       Thread thread1=new Thread(new Runnable() {
+           @Override
+           public void run() {
+               t.MethodA();
+           }
+       });
+        //添加一个线程，调用实例t1的B方法
+       Thread thread2=new Thread(new Runnable() {
+           @Override
+           public void run() {
+               t1.MethodB();
+           }
+       });
+        //添加一个线程，调用实例t的C方法
+       Thread thread3=new Thread(new Runnable() {
+           @Override
+           public void run() {
+               t.MethodC();
+           }
+       });
+        //添加一个线程，调用类的的静态D方法
+        Thread thread4=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ThreadTest.MethodD();
+            }
+        });
+       thread1.setName("线程一");
+       thread2.setName("线程二");
+       thread3.setName("线程三");
+       thread4.setName("线程四");
+
+       thread1.start();
+       thread2.start();
+       thread3.start();
+       thread4.start();
+
+    }
+
+}
+
+class ThreadTest {
+    //A方法在普通方法上加同步关键字默认是当前对象作为锁
+    public synchronized void MethodA(){
+        System.out.println(Thread.currentThread().getName()+"MethodA");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    //B方法在普通代码块上加同步关键字显式把当前对象作为锁
+    public void MethodB(){
+        synchronized (this){
+            System.out.println(Thread.currentThread().getName()+"MethodB");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //C方法在普通代码块上加同步关键字显式把当前类作为锁
+    public void MethodC(){
+        synchronized(ThreadTest.class){
+            System.out.println(Thread.currentThread().getName()+"MethodC");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //D方法在静态方法上加同步关键字默认是当前类作为锁
+    public static synchronized void MethodD(){
+        System.out.println(Thread.currentThread().getName()+"MethodD");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
