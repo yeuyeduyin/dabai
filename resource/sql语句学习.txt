@@ -19,3 +19,9 @@ UNIQUE¡¢FULLTEXTºÍSPATIAL¶¼ÊÇ¿ÉÑ¡²ÎÊı£¬·Ö±ğÓÃÓÚ±íÊ¾Î¨Ò»ĞÔË÷Òı¡¢È«ÎÄË÷ÒıºÍ¿Õ¼äË÷Ò
 INDEX£¬ÓÃÓÚÖ¸Ã÷×Ö¶ÎÎªË÷Òı¡£ 
 
 show index from plan_tab ²é¿´±íÖĞËùÓĞË÷Òı
+
+#´´½¨´æ´¢¹ı³Ì
+create procedure tt£¨OUT ss int£©
+begin
+sqlÓï¾ä£»
+end
