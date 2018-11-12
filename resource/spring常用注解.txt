@@ -1,4 +1,6 @@
 @RestController
+scope=“prototype”变单例为多例
+
 @RequestMapping
 
 
