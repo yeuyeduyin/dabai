@@ -1,0 +1,8 @@
+springBoot的文件：
+yaml文件：
+properties文件：。
+
+
+@PropertySource(value = {"classpath:test.properties"}, ignoreResourceNotFound = true)//可以放多个,{}里面用,分开
+使用@Value("${spring.profiles.active}")注解直接注入对应的值、
+使用@configurationProperties(prefix = "my")  //需要有set方法,注解把对应的值绑定到一个前缀为my的同名对象上
