@@ -1,0 +1,83 @@
+Bean配置信息定义了Bean的实现及依赖关系，Spring容器根据各种形式的Bean配置信息在容器内部建立Bean定义注册表，然后根据注册表加载、实例化Bean，并建立Bean和Bean的依赖关系，最后将这些准备就绪的Bean放到Bean缓存池中，以供外层的应用程序进行调用。
+
+bean配置有三种方法：基于xml配置Bean、使用注解定义Bean、基于java类提供Bean定义信息
+
+1.基于XML的配置文件定义了简单的Bean
+<bean id="userDao" class="com.baobaotao.anno.UserDao"/>
+
+2.使用注解定义Bean，采用基于注解的配置方式时，Bean定义信息即通过在Bean实现类上标注注解实现
+@Component("userDao")
+public class UserDao {
+}
+除了@Component以外，Spring提供了3个功能基本和@Component等效的注解，它们分别用于对DAO、Service及Web层的Controller进行注解
+@Repository：用于对DAO实现类进行标注；
+@Service：用于对Service实现类进行标注；
+@Controller：用于对Controller实现类进行标注；
+
+3.基于java类提供Bean定义，在普通的POJO类中只要标注@Configuration注解，就可以为spring容器提供Bean定义的信息了，每个标注了@Bean的类方法都相当于提供了一个Bean的定义信息。
+@Configuration
+public class AppConf {
+        //②以下两个方法定义了两个Bean，以提供了Bean的实例化逻辑
+    @Bean
+    public UserDao userDao(){
+       return new UserDao();    
+    }
+    @Bean
+    public LogDao logDao(){
+        return new LogDao();
+    }
+
+Bean注入
+Bean注入的方式有两种：
+一种是在XML中配置，此时分别有属性注入（Setter方法）、构造函数注入和工厂方法注入；
+另一种则是使用注解的方式注入 @Autowired,@Resource,@Required。
+
+Setter方法注入例子：
+<bean id="logDao" class="com.baobaotao.anno.LogDao"/>
+    <bean id="userDao" class="com.baobaotao.anno.UserDao"/>
+   <bean class="com.baobaotao.anno.LogonService">
+       <property name="logDao" ref="logDao"></property>
+       <property name="userDao" ref="userDao"></property>
+   </bean>
+
+构造方法注入例子：
+<bean id="logDao" class="com.baobaotao.anno.LogDao"/>
+    <bean id="userDao" class="com.baobaotao.anno.UserDao"/>
+   <bean class="com.baobaotao.anno.LogonService">
+      <constructor-arg  ref="logDao"></constructor-arg>
+       <constructor-arg ref="userDao"></constructor-arg>
+   </bean>
+
+工厂方法注入例子：
+public class CarFactory {
+   public Car createHongQiCar(){
+       Car car = new Car();
+       car.setBrand("红旗CA72");
+       return car;
+   }
+   public static Car createCar(){
+       Car car = new Car();
+       return car;
+   }
+}
+非静态工厂方法：
+必须先实例化工厂类后才能调用工厂方法。
+<bean id="carFactory" class="com.baobaotao.ditype.CarFactory" />
+<bean id="car5" factory-bean="carFactory" factory-method="createHongQiCar">
+
+静态工厂方法：
+很多工厂类都是静态的，这意味着用户在无须创建工厂类实例的情况下就可以调用工厂类方法，因此，静态工厂方法比非静态工厂方法的调用更加方便。
+<bean id="car6" class="com.baobaotao.ditype.CarFactory"
+        factory-method="createCar"></bean>
+
+@Autowired默认按类型匹配的方式，在容器查找匹配的Bean，当有且仅有一个匹配的Bean时，Spring将其注入到@Autowired标注的变量中。如果容器中没有一个和标注变量类型匹配的Bean，Spring容器启动时将报NoSuchBeanDefinitionException的异常。如果希望Spring即使找不到匹配的Bean完成注入也不用抛出异常，那么可以使用@Autowired(required=false)进行标注：
+
+@Qualifier指定注入Bean的名称
+如果容器中有一个以上匹配的Bean时，则可以通过@Qualifier注解限定Bean的名称
+
+Spring还支持@Resource和@Inject注解，这两个标准注解和@Autowired注解的功能类型，都是对类变量及方法入参提供自动注入的功能。@Resource要求提供一个Bean名称的属性，如果属性为空，则自动采用标注处的变量名或方法名作为Bean的名称。
+
+
+
+
+

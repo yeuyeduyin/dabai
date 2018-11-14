@@ -1,0 +1,19 @@
+Queue： 基本上，一个队列就是一个先入先出（FIFO）的数据结构。
+
+Queue的实现
+
+1.没有实现阻塞队列的LinkedList：实现java.util.Queue接口和java.util.AbstractQueue接口
+内置的不阻塞队列：
+PriorityQueue和ConcurrentLinkedQueue
+
+2.实现阻塞接口的：
+ BlockingQueue接口和
+ 五个阻塞队列类：
+ ArrayBlockingQueue：一个由数组支持的有界队列。
+ LinkedBlockingQueue：一个由链表节点支持的可选有界队列。
+ PriorityBlockingQueue：一个由优先级堆支持的无界优先级队列。
+ DelayQueue：一个由优先级堆支持的、基于时间的调度队列。
+ SynchronousQueue：一个利用BlockingQueue接口的简单聚集机制。
+ 
+ 
+ 区别在于，当队列是空的时，从队列中获取元素的操作将会被阻塞，或者当队列是满时，往队列里添加元素的操作会被阻塞。
