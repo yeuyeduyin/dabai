@@ -1,0 +1,1 @@
+jdk动态代理是jdk的Proxy方式实现的动态代理，需要目标类有接口才能代理，cglib是通过对目标类进行继承代理。如果目标类被final修饰，那么该类无法被cgLib代理。cglib是第三方jar实现现在集成在spring-core里
