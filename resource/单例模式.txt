@@ -5,32 +5,30 @@
 public class DoubleCheckMode {
 
     
-private volatile static DoubleCheckMode sDoubleCheckMode ;
-
+private static DoubleCheckMode sDoubleCheckMode ;
     
-public DoubleCheckMode() {
-        
-   
-}
+      public DoubleCheckMode() {
 
+      }
     
-public static DoubleCheckMode getInstance() {
+      public static DoubleCheckMode getInstance() {
         
-if (sDoubleCheckMode == null)
+            if (sDoubleCheckMode == null){
             
-synchronized (DoubleCheckMode.class) {
+            synchronized (DoubleCheckMode.class) {
                 
-if (sDoubleCheckMode == null) {
+                  if (sDoubleCheckMode == null) {
                     
-sDoubleCheckMode = new DoubleCheckMode();
+                        sDoubleCheckMode = new DoubleCheckMode();
                 
-}
+                  }
+            }
             
-}
+      }
         
-return sDoubleCheckMode;
+      return sDoubleCheckMode;
     
-}
+      }
 
 /**
  * 静态内部类的方式实现单例，可以保证多线程的对象唯一性，还有提升性能，不用同步锁机制
@@ -39,20 +37,17 @@ return sDoubleCheckMode;
 public class InnerStaticMode {
 
     
-private static class SingleTonHolder {
+      private static class SingleTonHolder {
+     
+            public static InnerStaticMode sInnerStaticMode = new InnerStaticMode();
 
+      }
+   
+      public static InnerStaticMode getInstance(){
         
-	public static InnerStaticMode sInnerStaticMode = new InnerStaticMode();
-
+            return SingleTonHolder.sInnerStaticMode;
     
-}
-
-    
-public static InnerStaticMode getInstance(){
-        
-return SingleTonHolder.sInnerStaticMode;
-    
-}
+      }
 
 }
 
@@ -61,8 +56,7 @@ return SingleTonHolder.sInnerStaticMode;
  */
 
 public enum  EnumMode {
-
-    
+   
 INSTANCE
 }
 

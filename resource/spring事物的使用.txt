@@ -15,75 +15,45 @@ ISOLATION_SERIALIZABLE ÕâÊÇ»¨·Ñ×î¸ß´ú¼Ûµ«ÊÇ×î¿É¿¿µÄÊÂÎñ¸ôÀë¼¶±ð¡£ÊÂÎñ±»´¦ÀíÎªË³Ð
 
 ¹Ø¼ü´Ê£º
 1)Ôà¶Á£ºÊÂÎñ1¸üÐÂÁË¼ÇÂ¼£¬µ«Ã»ÓÐÌá½»£¬ÊÂÎñ2¶ÁÈ¡ÁË¸üÐÂºóµÄÐÐ£¬È»ºóÊÂÎñT1»Ø¹ö£¬ÏÖÔÚT2¶ÁÈ¡ÎÞÐ§¡£
-2)²»¿ÉÖØ¸´¶ÁÈ¡£ºÊÂÎñ1¶ÁÈ¡¼ÇÂ¼Ê±£¬ÊÂÎñ2¸üÐÂÁË¼ÇÂ¼²¢Ìá½»£¬ÊÂÎñ1ÔÙ´Î¶ÁÈ¡Ê±¿ÉÒÔ¿´µ½ÊÂÎñ2ÐÞ¸ÄºóµÄ¼ÇÂ¼£»
-3)»Ã¶Á£ºÊÂÎñ1¶ÁÈ¡¼ÇÂ¼Ê±ÊÂÎñ2Ôö¼ÓÁË¼ÇÂ¼²¢Ìá½»£¬ÊÂÎñ1ÔÙ´Î¶ÁÈ¡Ê±¿ÉÒÔ¿´µ½ÊÂÎñ2ÐÂÔöµÄ¼ÇÂ¼£»
+2)»Ã¶Á£ºÊÂÎñ1¶ÁÈ¡¼ÇÂ¼Ê±ÊÂÎñ2Ôö¼ÓÁË¼ÇÂ¼²¢Ìá½»£¬ÊÂÎñ1ÔÙ´Î¶ÁÈ¡Ê±¿ÉÒÔ¿´µ½ÊÂÎñ2ÐÂÔöµÄ¼ÇÂ¼£»
+3)²»¿ÉÖØ¸´¶ÁÈ¡£ºÊÂÎñ1¶ÁÈ¡¼ÇÂ¼Ê±£¬ÊÂÎñ2¸üÐÂÁË¼ÇÂ¼²¢Ìá½»£¬ÊÂÎñ1ÔÙ´Î¶ÁÈ¡Ê±¿ÉÒÔ¿´µ½ÊÂÎñ2ÐÞ¸ÄºóµÄ¼ÇÂ¼£»
+
 
 springÖÐÊ¹ÓÃ@Transactional(isolation = Isolation.SERIALIZABLE ,rollbackFor = Exception.class)
 
 @Transactional ×¢½âÖ»ÄÜÓ¦ÓÃµ½ public ·½·¨²ÅÓÐÐ§
 
-
 value ºÍ transactionManager ÊôÐÔ
 ËüÃÇÁ½¸öÊÇÒ»ÑùµÄÒâË¼¡£µ±ÅäÖÃÁË¶à¸öÊÂÎñ¹ÜÀíÆ÷Ê±£¬¿ÉÒÔÊ¹ÓÃ¸ÃÊôÐÔÖ¸¶¨Ñ¡ÔñÄÄ¸öÊÂÎñ¹ÜÀíÆ÷¡£
-
 
 propagation ÊôÐÔ
 ÊÂÎñµÄ´«²¥ÐÐÎª£¬
 Ä¬ÈÏÖµÎª Propagation.REQUIRED¡£
-
 ¿ÉÑ¡µÄÖµÓÐ£º
+Propagation.REQUIRED£ºÈç¹ûµ±Ç°´æÔÚÊÂÎñ£¬Ôò¼ÓÈë¸ÃÊÂÎñ£¬Èç¹ûµ±Ç°²»´æÔÚÊÂÎñ£¬Ôò´´½¨Ò»¸öÐÂµÄÊÂÎñ¡£
 
+Propagation.SUPPORTS£ºÈç¹ûµ±Ç°´æÔÚÊÂÎñ£¬Ôò¼ÓÈë¸ÃÊÂÎñ£»Èç¹ûµ±Ç°²»´æÔÚÊÂÎñ£¬ÔòÒÔ·ÇÊÂÎñµÄ·½Ê½¼ÌÐøÔËÐÐ¡£
 
-Propagation.REQUIRED
+Propagation.MANDATORY£ºÈç¹ûµ±Ç°´æÔÚÊÂÎñ£¬Ôò¼ÓÈë¸ÃÊÂÎñ£»Èç¹ûµ±Ç°²»´æÔÚÊÂÎñ£¬ÔòÅ×³öÒì³£¡£
 
-Èç¹ûµ±Ç°´æÔÚÊÂÎñ£¬Ôò¼ÓÈë¸ÃÊÂÎñ£¬Èç¹ûµ±Ç°²»´æÔÚÊÂÎñ£¬Ôò´´½¨Ò»¸öÐÂµÄÊÂÎñ¡£
+Propagation.REQUIRES_NEW£ºÖØÐÂ´´½¨Ò»¸öÐÂµÄÊÂÎñ£¬Èç¹ûµ±Ç°´æÔÚÊÂÎñ£¬ÔÝÍ£µ±Ç°µÄÊÂÎñ¡£
 
+Propagation.NOT_SUPPORTED£ºÒÔ·ÇÊÂÎñµÄ·½Ê½ÔËÐÐ£¬Èç¹ûµ±Ç°´æÔÚÊÂÎñ£¬ÔÝÍ£µ±Ç°µÄÊÂÎñ¡£
 
-Propagation.SUPPORTS
+Propagation.NEVER£ºÒÔ·ÇÊÂÎñµÄ·½Ê½ÔËÐÐ£¬Èç¹ûµ±Ç°´æÔÚÊÂÎñ£¬ÔòÅ×³öÒì³£¡£
 
-Èç¹ûµ±Ç°´æÔÚÊÂÎñ£¬Ôò¼ÓÈë¸ÃÊÂÎñ£»Èç¹ûµ±Ç°²»´æÔÚÊÂÎñ£¬ÔòÒÔ·ÇÊÂÎñµÄ·½Ê½¼ÌÐøÔËÐÐ¡£
-
-Propagation.MANDATORY
-
-Èç¹ûµ±Ç°´æÔÚÊÂÎñ£¬Ôò¼ÓÈë¸ÃÊÂÎñ£»Èç¹ûµ±Ç°²»´æÔÚÊÂÎñ£¬ÔòÅ×³öÒì³£¡£
-
-
-Propagation.REQUIRES_NEW
-
-ÖØÐÂ´´½¨Ò»¸öÐÂµÄÊÂÎñ£¬Èç¹ûµ±Ç°´æÔÚÊÂÎñ£¬ÔÝÍ£µ±Ç°µÄÊÂÎñ¡£
-
-
-Propagation.NOT_SUPPORTED
-
-ÒÔ·ÇÊÂÎñµÄ·½Ê½ÔËÐÐ£¬Èç¹ûµ±Ç°´æÔÚÊÂÎñ£¬ÔÝÍ£µ±Ç°µÄÊÂÎñ¡£
-
-
-Propagation.NEVER
-
-ÒÔ·ÇÊÂÎñµÄ·½Ê½ÔËÐÐ£¬Èç¹ûµ±Ç°´æÔÚÊÂÎñ£¬ÔòÅ×³öÒì³£¡£
-
-
-Propagation.NESTED
-
-ºÍ Propagation.REQUIRED Ð§¹ûÒ»Ñù¡£
-
-ÕâÐ©¸ÅÄîÀí½âÆðÀ´ÊµÔÚÊÇÓÐµã¶ù³éÏó£¬ºóÎÄ»áÓÃ´úÂëÊ¾Àý½âÊÍËµÃ÷¡£
-
+Propagation.NESTEDºÍ Propagation.REQUIRED Ð§¹ûÒ»Ñù¡£
 
 
 isolation ÊôÐÔ
 ÊÂÎñµÄ¸ôÀë¼¶±ð£¬Ä¬ÈÏÖµÎª Isolation.DEFAULT¡£
 
 ¿ÉÑ¡µÄÖµÓÐ£º
-
-
 Isolation.DEFAULT
 
 Ê¹ÓÃµ×²ãÊý¾Ý¿âÄ¬ÈÏµÄ¸ôÀë¼¶±ð¡£
 
-
 Isolation.READ_UNCOMMITTED
-
 
 Isolation.READ_COMMITTED
 
