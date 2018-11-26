@@ -1,0 +1,13 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+server:
+  port: 8080
+  sessionTimeout: 30
+  tomcat:
+    uri-encoding: utf-8
+  servlet:
+    context-path: /dabai
+
