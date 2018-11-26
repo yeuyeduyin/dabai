@@ -13,5 +13,13 @@
         <module name="dabai-web" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dabai" target="1.5" />
+      <module name="dabai-mapper" target="1.5" />
+      <module name="dabai-service" target="1.5" />
+      <module name="dabai-service-api" target="1.5" />
+      <module name="dabai-service-impl" target="1.5" />
+      <module name="dabai-web" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
